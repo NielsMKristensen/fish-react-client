@@ -11,3 +11,55 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.Navbar {
+  width: auto;
+  height: 150px;
+  background: #352275;  
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
+.navBarPic {
+  width: auto;
+  height: 100px;
+  /* background: #352275;  */
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
+.SignupPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+
+}
+
+.signupForm {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+}
+
+.LoginPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.createLake {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.createLakeForm {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+}
