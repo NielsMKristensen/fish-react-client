@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import react, { useState, useContext } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from '../context/auth.context';
@@ -16,6 +16,12 @@ function CreateLake() {
   const [prices, setPrices] = useState("")
   const [CVRnumber, setCVRnumber] = useState(0)
   const [pictureLinks, setPictureLinks] = useState("")
+
+  //cloudinary stuff
+    const [fileInputState, setFileInputState] = useState('');
+    const [selectedFile, setSelectedFile] = useState();
+    
+    
   
 
 
@@ -33,13 +39,44 @@ function CreateLake() {
   const handlePrices = (e) => setPrices(e.target.value);
   const handleCVRnumber = (e) => setCVRnumber(e.target.value);
   const handlePictureLinks = (e) => setPictureLinks(e.target.value);
-
+  
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
+    setFileInputState(e.target.value);
+    };
 
   const handleCreateLakeSubmit = (e) => {
     e.preventDefault();
     
     const requestBody = {lakeName, street, city, lakePhoneNumber, lakeEmail, description, openingHours, prices, CVRnumber, pictureLinks};
     const localToken = localStorage.getItem('authToken')
+    
+    //uploade file to cloudinary and save id in pictureLinks
+    const reader = new FileReader();
+    reader.readAsDataURL(selectedFile)
+    reader.onloadend = () => {
+        uploadImage(reader.result);
+    };
+    reader.onerror = () => {
+        console.error('something went wrong!!');
+    };
+
+    const uploadImage = async (base64EncodedImage) => {
+
+        await axios.post(`${API_URL}/api/uploadpicture`, JSON.stringify({ data: base64EncodedImage }), { headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localToken}`, lake : lakeName }})
+        .then((response) => {
+        })
+        .catch((error) => {
+            const errorDescription = error.response.data.message;
+            setErrorMessage(errorDescription);
+          })
+    };
+    
+    
+
+        
+        
 
     // Make an axios request to the API
     // If POST request is successful redirect to login page
@@ -136,10 +173,10 @@ function CreateLake() {
 
         <label>Upload picture:</label>
         <input 
+          id="fileInput"
           type="file"
           name="Lake-Picture"
-          value={pictureLinks}
-          onChange={handlePictureLinks}
+          onChange={handleFileInputChange}
         />
         
 
