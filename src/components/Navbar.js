@@ -18,9 +18,7 @@ function Navbar() {
           <Link to="/CreateLake">
             <button>Create Lake</button>
           </Link> 
-
-          <button onClick={logOutUser}>Logout</button>
-          <span>{user && user.name}</span>     
+          <button onClick={logOutUser}>Logout {user && user.name}</button>    
         </>
       )}
  

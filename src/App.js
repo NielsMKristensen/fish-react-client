@@ -4,8 +4,10 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from './components/Navbar';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
-import FrontPage from './pages/FrontPage';
 import CreateLake from './pages/CreateLake';
+import LakeList from './pages/LakeList';
+import LakeDetails from './pages/LakeDetails';
+import EditLake from './pages/EditLake';
 
 function App() {
   return (
@@ -13,8 +15,12 @@ function App() {
      <Navbar />
 
      <Routes>
-     <Route path="/" element={ <FrontPage /> } />
+     {/* <Route path="/" element={ <FrontPage /> } /> */}
+     <Route path="/" element={ <LakeList /> } />
      <Route path="/CreateLake" element={<CreateLake />} />
+     <Route path="/lake/:_id" element={<LakeDetails />} />
+     {/* <Route path="/lake/edit/:_id" element={<EditLake /> } /> */}
+     <Route path="/lake/edit/:_id" element={<EditLake /> } />
 
      <Route path="/signup" element={<SignupPage />}/>
      <Route path="/login" element={<LoginPage />} />
