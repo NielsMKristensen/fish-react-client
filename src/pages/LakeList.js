@@ -6,7 +6,8 @@ const API_URL = "http://localhost:5005";
 
 function LakeList() {
   const [lakes, setLakes] = useState([]);
-
+  
+  //gets all lakes from the database via the api.
   const getAllLakes = () => {
     const storedToken = localStorage.getItem("authToken");
 
@@ -19,8 +20,7 @@ function LakeList() {
     .catch((error) => console.log(error));
 };
 
-  // We set this effect will run only once, after the initial render
-  // by setting the empty dependency array - []
+  //run get all lakes once.
   useEffect(() => {
     getAllLakes();
     // console.log();
@@ -30,7 +30,7 @@ function LakeList() {
   return (
     <div className="LakeList">
       <h1>List Of Lakes</h1>
-
+      {/* populates the list with lake cards containing information on each lake. */}
       { lakes.map((lake) => <LakeCard key={lake._id} {...lake} /> )} 
        
     </div>

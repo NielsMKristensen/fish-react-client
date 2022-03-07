@@ -1,7 +1,7 @@
 //copy of create lake page for now needs to use other api's and stuff
 
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 
@@ -10,64 +10,57 @@ const API_URL = "http://localhost:5005";
 
 function EditLake() {
     const data = useLocation();
-    
-    console.log("props HERE", data.state.lakeName)
-
-    //get id from header
+//get id from header
 const { _id } = useParams();
 
-  const [lakeName, setLakeName] = useState(`${data.state.lakeName}`)
-  const [street, setStreet] = useState(`${data.state.street}`)
-  const [city, setCity] = useState(`${data.state.city}`)
-  const [lakePhoneNumber, setLakePhoneNumber] = useState(`${data.state.lakePhoneNumber}`)
-  const [lakeEmail, setLakeEmail] = useState(`${data.state.lakeEmail}`)
-  const [description, setDescription] = useState(`${data.state.description}`)
-  const [openingHours, setOpeningHours] = useState(`${data.state.openingHours}`)
-  const [prices, setPrices] = useState(`${data.state.prices}`)
-  const [CVRnumber, setCVRnumber] = useState(`${data.state.CVRnumber}`)
-  const [pictureLinks, setPictureLinks] = useState("")
-  
+//state variables to be used to store data from form.
+const [lakeName, setLakeName] = useState(`${data.state.lakeName}`)
+const [street, setStreet] = useState(`${data.state.street}`)
+const [city, setCity] = useState(`${data.state.city}`)
+const [lakePhoneNumber, setLakePhoneNumber] = useState(`${data.state.lakePhoneNumber}`)
+const [lakeEmail, setLakeEmail] = useState(`${data.state.lakeEmail}`)
+const [description, setDescription] = useState(`${data.state.description}`)
+const [openingHours, setOpeningHours] = useState(`${data.state.openingHours}`)
+const [prices, setPrices] = useState(`${data.state.prices}`)
+const [CVRnumber, setCVRnumber] = useState(`${data.state.CVRnumber}`)
+const [pictureLinks, setPictureLinks] = useState("")
 
-  
-  //cloudinary stuff
-    //let blob = new Blob(['https://res.cloudinary.com/dnaiwn8mr/image/upload/v1646639808/trout_c5j2ik.jpg'], {type: 'text/plain'});
-    const [fileInputState, setFileInputState] = useState('');
-    const [selectedFile, setSelectedFile] = useState();
+//cloudinary stuff
+const [selectedFile, setSelectedFile] = useState();
     
-  //error message handling
-  const [errorMessage, setErrorMessage] = useState(undefined);
+//error message handling
+const [errorMessage, setErrorMessage] = useState(undefined);
   
-  //navigate functionality
-  const navigate = useNavigate();
+//navigate functionality
+const navigate = useNavigate();
   
 
-  //handle input from form
-  const handleLakeName = (e) => setLakeName(e.target.value);
-  const handleStreet = (e) => setStreet(e.target.value);
-  const handleCity = (e) => setCity(e.target.value);
-  const handleLakePhoneNumber = (e) => setLakePhoneNumber(e.target.value);
-  const handleLakeEmail = (e) => setLakeEmail(e.target.value);
-  const handleDescription = (e) => setDescription(e.target.value);
-  const handleOpeningHours = (e) => setOpeningHours(e.target.value);
-  const handlePrices = (e) => setPrices(e.target.value);
-  const handleCVRnumber = (e) => setCVRnumber(e.target.value);
-  const handlePictureLinks = (e) => setPictureLinks(e.target.value);
+//handle input from form
+const handleLakeName = (e) => setLakeName(e.target.value);
+const handleStreet = (e) => setStreet(e.target.value);
+const handleCity = (e) => setCity(e.target.value);
+const handleLakePhoneNumber = (e) => setLakePhoneNumber(e.target.value);
+const handleLakeEmail = (e) => setLakeEmail(e.target.value);
+const handleDescription = (e) => setDescription(e.target.value);
+const handleOpeningHours = (e) => setOpeningHours(e.target.value);
+const handlePrices = (e) => setPrices(e.target.value);
+const handleCVRnumber = (e) => setCVRnumber(e.target.value);
+const handlePictureLinks = (e) => setPictureLinks(e.target.value);
   
-  //handle file selector
-  const handleFileInputChange = (e) => {
+//handle file selector
+const handleFileInputChange = (e) => {
     const file = e.target.files[0];
     setSelectedFile(file);
-    //setFileInputState(e.target.value);
     };
 
-  const handleCreateLakeSubmit = (e) => {
+//handle lake changes update.
+const handleUpdateLakeSubmit = (e) => {
     e.preventDefault();
     
     const requestBody = {lakeName, street, city, lakePhoneNumber, lakeEmail, description, openingHours, prices, CVRnumber, pictureLinks};
     const localToken = localStorage.getItem('authToken')
     
     //uploade file to cloudinary and save id in pictureLinks
-    
     const reader = new FileReader();
     reader.readAsDataURL(selectedFile)
     reader.onloadend = () => {
@@ -89,8 +82,6 @@ const { _id } = useParams();
     };
       
     // Make an axios request to the API
-    // If POST request is successful redirect to login page
-    // If the request resolves with an error, set the error message in the state
     axios.put(`${API_URL}/api/lake/${_id}`, requestBody, { headers: { Authorization: `Bearer ${localToken}` } })
       .then((response) => {
         navigate(`/lake/${data.state._id}`);
@@ -101,12 +92,12 @@ const { _id } = useParams();
       })
   };
 
-
+  //render update form
   return (
     <div className="createLake">
       <h1>Sign Up</h1>
 
-      <form className="createLakeForm" onSubmit={handleCreateLakeSubmit}>
+      <form className="createLakeForm" onSubmit={handleUpdateLakeSubmit}>
         <label>Lake Name:</label>
         <input 
           type="text"

@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 const API_URL = "http://localhost:5005";
 
 function CreateLake() {
+  
+  //state variables to be used to store data from form.
   const [lakeName, setLakeName] = useState("");
   const [street, setStreet] = useState("")
   const [city, setCity] = useState("")
@@ -18,15 +20,15 @@ function CreateLake() {
   const [pictureLinks, setPictureLinks] = useState("")
 
   //cloudinary stuff
-    //let blob = new Blob(['https://res.cloudinary.com/dnaiwn8mr/image/upload/v1646639808/trout_c5j2ik.jpg'], {type: 'text/plain'});
-    const [fileInputState, setFileInputState] = useState('');
     const [selectedFile, setSelectedFile] = useState();
     
-
+  //handle error messages
   const [errorMessage, setErrorMessage] = useState(undefined);
-
+  
+  //handle navigation links
   const navigate = useNavigate();
   
+  //handle input fields
   const handleLakeName = (e) => setLakeName(e.target.value);
   const handleStreet = (e) => setStreet(e.target.value);
   const handleCity = (e) => setCity(e.target.value);
@@ -45,6 +47,7 @@ function CreateLake() {
     //setFileInputState(e.target.value);
     };
 
+  //handle Submit of lake to create.
   const handleCreateLakeSubmit = (e) => {
     e.preventDefault();
     
@@ -52,7 +55,6 @@ function CreateLake() {
     const localToken = localStorage.getItem('authToken')
     
     //uploade file to cloudinary and save id in pictureLinks
-    
     const reader = new FileReader();
     reader.readAsDataURL(selectedFile)
     reader.onloadend = () => {
@@ -73,9 +75,7 @@ function CreateLake() {
           })
     };
       
-    // Make an axios request to the API
-    // If POST request is successful redirect to login page
-    // If the request resolves with an error, set the error message in the state
+    // Make an axios request to the API to create the Lake and navigate to start page.
     axios.post(`${API_URL}/api/lake`, requestBody, { headers: { Authorization: `Bearer ${localToken}` } })
       .then((response) => {
         navigate('/');
@@ -86,7 +86,7 @@ function CreateLake() {
       })
   };
 
-
+  //render form
   return (
     <div className="createLake">
       <h1>Sign Up</h1>

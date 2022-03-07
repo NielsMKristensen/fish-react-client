@@ -19,7 +19,6 @@ function App() {
      <Route path="/" element={ <LakeList /> } />
      <Route path="/CreateLake" element={<CreateLake />} />
      <Route path="/lake/:_id" element={<LakeDetails />} />
-     {/* <Route path="/lake/edit/:_id" element={<EditLake /> } /> */}
      <Route path="/lake/edit/:_id" element={<EditLake /> } />
 
      <Route path="/signup" element={<SignupPage />}/>

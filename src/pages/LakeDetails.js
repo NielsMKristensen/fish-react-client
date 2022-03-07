@@ -14,6 +14,7 @@ function LakeDetails () {
     //navigate functionality
     const navigate = useNavigate();
   
+  //get the details of the specific lake where details was clicked.
   const getLake = () => {
     // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
@@ -32,15 +33,15 @@ function LakeDetails () {
   
   useEffect(()=> {
     getLake();
-  }, [] );
+  },); //removed [] due to error..... abit puzzeled but writing this if issues should arise.
 
-
+  //handle delete button
   const handleDeleteLakeSubmit = (e) => {
     e.preventDefault();
 
     const localToken = localStorage.getItem('authToken')
       
-    // Make an axios request to the API
+    // Make an axios request to the API to delete a lake.
     axios.delete(`${API_URL}/api/lake/${_id}`, { headers: { Authorization: `Bearer ${localToken}` } })
       .then((response) => {
         navigate(`/`);
@@ -84,19 +85,21 @@ function LakeDetails () {
         </>
       )}
 
+        {/* button to redirect to the order fishing permit page */}
       <Link to="/orderpermit">
         <button>Order Permit</button>
       </Link>
-          
+
+          {/*passes data to the edit form to prepopulate all the fields. */}
       <Link to={`/lake/edit/${_id}`} state={lake}>
         <button>Edit Lake</button>
       </Link>
-
+        {/* Delete button to delete the lake */}
       <form className="DeleteLakeForm" onSubmit={handleDeleteLakeSubmit}>
         <button type="submit">Delete Lake</button>
       </form>
       
-
+      { errorMessage && <p className="error-message">{errorMessage}</p> }
 
       
     </div>
