@@ -12,12 +12,15 @@ function Navbar() {
       <NavLink to="/"><a href=""><img src={navBarPic} alt="home gif" className="navBarPic" /></a> </NavLink>
  
       
-      {isLoggedIn && (
+      {isLoggedIn &&  (
+        
         <>
         {/* add is owner to display create lake */}
+          { user.ownerOfLake &&
           <Link to="/CreateLake">
             <button>Create Lake</button>
           </Link> 
+          }
           <button onClick={logOutUser}>Logout {user && user.name}</button>    
         </>
       )}

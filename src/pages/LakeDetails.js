@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
+import { AuthContext } from '../context/auth.context';
 
 const API_URL = "http://localhost:5005";
 
 
 function LakeDetails () {
+  const { user } = useContext(AuthContext);
   const [lake, setLake] = useState(null);
   const { _id } = useParams();
     //error message handling
@@ -90,15 +92,19 @@ function LakeDetails () {
         <button>Order Permit</button>
       </Link>
 
+
           {/*passes data to the edit form to prepopulate all the fields. */}
+      {user.ownerOfLake &&
       <Link to={`/lake/edit/${_id}`} state={lake}>
         <button>Edit Lake</button>
       </Link>
+      }
         {/* Delete button to delete the lake */}
+      {user.ownerOfLake &&
       <form className="DeleteLakeForm" onSubmit={handleDeleteLakeSubmit}>
         <button type="submit">Delete Lake</button>
       </form>
-      
+      }
       { errorMessage && <p className="error-message">{errorMessage}</p> }
 
       
