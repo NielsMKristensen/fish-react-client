@@ -8,6 +8,7 @@ import CreateLake from './pages/CreateLake';
 import LakeList from './pages/LakeList';
 import LakeDetails from './pages/LakeDetails';
 import EditLake from './pages/EditLake';
+import OrderPermit from './pages/OrderPermit';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
      <Route path="/CreateLake" element={<CreateLake />} />
      <Route path="/lake/:_id" element={<LakeDetails />} />
      <Route path="/lake/edit/:_id" element={<EditLake /> } />
+     <Route path="/orderpermit" element={<OrderPermit /> } />
 
      <Route path="/signup" element={<SignupPage />}/>
      <Route path="/login" element={<LoginPage />} />

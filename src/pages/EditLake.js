@@ -9,7 +9,8 @@ import { useNavigate, useParams, useLocation } from "react-router-dom";
 const API_URL = "http://localhost:5005";
 
 function EditLake() {
-    const data = useLocation();
+//get data from state passed from link.
+const data = useLocation();
 //get id from header
 const { _id } = useParams();
 

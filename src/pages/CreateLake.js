@@ -20,7 +20,7 @@ function CreateLake() {
   const [pictureLinks, setPictureLinks] = useState("")
 
   //cloudinary stuff
-    const [selectedFile, setSelectedFile] = useState();
+    const [selectedFile, setSelectedFile] = useState(null);
     
   //handle error messages
   const [errorMessage, setErrorMessage] = useState(undefined);
@@ -43,8 +43,11 @@ function CreateLake() {
   //handle file selector
   const handleFileInputChange = (e) => {
     const file = e.target.files[0];
-    setSelectedFile(file);
-    //setFileInputState(e.target.value);
+    console.log ("FILE", file)
+    if (file === null){
+      return console.log("no file selected 1")
+    }else {setSelectedFile(file);}
+    
     };
 
   //handle Submit of lake to create.
@@ -53,17 +56,22 @@ function CreateLake() {
     
     const requestBody = {lakeName, street, city, lakePhoneNumber, lakeEmail, description, openingHours, prices, CVRnumber, pictureLinks};
     const localToken = localStorage.getItem('authToken')
+    console.log("TEST", selectedFile)
     
     //uploade file to cloudinary and save id in pictureLinks
-    const reader = new FileReader();
-    reader.readAsDataURL(selectedFile)
-    reader.onloadend = () => {
-        uploadImage(reader.result);
-    };
-    reader.onerror = () => {
-        console.error('something went wrong!!');
-    };
-  
+    if (selectedFile === null) {
+      return console.log("No file selected")
+    } else {
+      const reader = new FileReader();
+      reader.readAsDataURL(selectedFile)
+      reader.onloadend = () => {
+          uploadImage(reader.result);
+      };
+      reader.onerror = () => {
+          console.error('something went wrong!!');
+      };
+    }
+
     const uploadImage = async (base64EncodedImage) => {
 
         await axios.post(`${API_URL}/api/uploadpicture`, JSON.stringify({ data: base64EncodedImage }), { headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${localToken}`, lake : lakeName }})
@@ -171,7 +179,9 @@ function CreateLake() {
           id="fileInput"
           type="file"
           name="Lake-Picture"
+          value=""
           onChange={handleFileInputChange}
+          
         />
         
         <br />

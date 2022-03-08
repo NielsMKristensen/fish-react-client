@@ -33,7 +33,7 @@ function LakeDetails () {
   
   useEffect(()=> {
     getLake();
-  },); //removed [] due to error..... abit puzzeled but writing this if issues should arise.
+  },[]); 
 
   //handle delete button
   const handleDeleteLakeSubmit = (e) => {
@@ -86,7 +86,7 @@ function LakeDetails () {
       )}
 
         {/* button to redirect to the order fishing permit page */}
-      <Link to="/orderpermit">
+      <Link to="/orderpermit" state={lake}>
         <button>Order Permit</button>
       </Link>
 
