@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import LakeCard from "../components/LakeCard";
 
-const API_URL = "http://localhost:5005";
+//const API_URL = "http://localhost:5005";
+const API_URL = "https://fish-react-client.herokuapp.com";
 
 function LakeList() {
   const [lakes, setLakes] = useState([]);
