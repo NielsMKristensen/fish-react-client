@@ -1,3 +1,5 @@
+import { Container, Row, Col, Button, Card, Form } from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import { Link, NavLink } from "react-router-dom";
 import { useContext } from "react";                     // <== IMPORT 
 import { AuthContext } from "../context/auth.context"; 
@@ -18,22 +20,22 @@ function Navbar() {
         
         <>
         {/* add is owner to display create lake */}
-          <button onClick={logOutUser}>Logout {user && user.name}</button>    
+          <Button onClick={logOutUser}>Logout {user && user.name}</Button>    
         </>
       )}
 
       { isOwner && (
         <>
           <Link to="/CreateLake">
-            <button>Create Lake</button>
+            <Button>Create Lake</Button>
           </Link> 
         </>
       )}
  
       {!isLoggedIn && (
         <>
-          <Link to="/signup"> <button>Sign Up</button> </Link>
-          <Link to="/login"> <button>Login</button> </Link>
+          <Link to="/signup"> <Button>Sign Up</Button> </Link>
+          <Link to="/login"> <Button>Login</Button> </Link>
         </>
       )}
     </nav>

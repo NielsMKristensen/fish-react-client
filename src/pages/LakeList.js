@@ -29,11 +29,13 @@ function LakeList() {
 
   return (
     <div className="LakeList">
-      <h1>List Of Lakes</h1>
+    <header className="App-header" >
+      <h1>Lakes</h1>
       {/* populates the list with lake cards containing information on each lake. */}
       {lakes.map((lake) => (
         <LakeCard key={lake._id} {...lake} />
       ))}
+      </header>
     </div>
   );
 }
