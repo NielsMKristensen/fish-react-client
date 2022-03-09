@@ -25,8 +25,10 @@ function SignupPage() {
   const handleStreet = (e) => setStreet(e.target.value);
   const handleCity = (e) => setCity(e.target.value);
   const handlePhoneNumber = (e) => setPhoneNumber(e.target.value);
-  const handleOwnerOfLake = (e) => setOwnerOfLake(e.target.value);
-
+  const handleOwnerOfLake = (e) => {
+     
+    setOwnerOfLake(!ownerOfLake);
+  }
 
   const handleSignupSubmit = (e) => {
     e.preventDefault();
@@ -104,7 +106,7 @@ function SignupPage() {
         <input 
           type="checkbox"
           name="ownerCheckbox"
-          value={ownerOfLake}
+          
           onChange={handleOwnerOfLake}
         />
         </label>

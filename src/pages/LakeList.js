@@ -12,7 +12,8 @@ function LakeList() {
     const storedToken = localStorage.getItem("authToken");
 
     axios
-      .get(`${API_URL}/api/lake`, {
+      .get(`${API_URL}/api/lake`
+      , {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => setLakes(response.data))

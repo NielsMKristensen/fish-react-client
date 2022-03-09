@@ -8,6 +8,7 @@ function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [isOwner, setIsOwner] = useState(false);
   
   
     const storeToken = (token) => {       //  <==  ADD
@@ -31,20 +32,23 @@ function AuthProviderWrapper(props) {
            // Update state variables        
             setIsLoggedIn(true);
             setIsLoading(false);
-            setUser(user);        
+            setUser(user);
+            setIsOwner(user.ownerOfLake)        
           })
           .catch((error) => {
             // If the server sends an error response (invalid token) 
             // Update state variables         
             setIsLoggedIn(false);
             setIsLoading(false);
-            setUser(null);        
+            setUser(null);
+            setIsOwner(false)        
           });      
         } else {
           // If the token is not available (or is removed)
             setIsLoggedIn(false);
             setIsLoading(false);
-            setUser(null);      
+            setUser(null);
+            setIsOwner(false)     
         }   
       }
 
@@ -60,13 +64,14 @@ function AuthProviderWrapper(props) {
         // and update the state variables    
         authenticateUser();
       } 
+      
 
       useEffect(() => {                 //  <==  ADD                                   
         authenticateUser();
       }, []);
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, isLoading, user, storeToken, authenticateUser, logOutUser }}>
+    <AuthContext.Provider value={{ isLoggedIn, isLoading, user, isOwner, storeToken, authenticateUser, logOutUser }}>
       {props.children}
     </AuthContext.Provider>
   )

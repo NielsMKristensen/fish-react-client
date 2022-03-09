@@ -5,7 +5,9 @@ import navBarPic from "../assets/trout.jpg"
 
 function Navbar() {
 
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  const { isLoggedIn, user, logOutUser, isOwner } = useContext(AuthContext);
+ 
+
   return (
     <nav className="Navbar">
       
@@ -16,12 +18,15 @@ function Navbar() {
         
         <>
         {/* add is owner to display create lake */}
-          { user.ownerOfLake &&
+          <button onClick={logOutUser}>Logout {user && user.name}</button>    
+        </>
+      )}
+
+      { isOwner && (
+        <>
           <Link to="/CreateLake">
             <button>Create Lake</button>
           </Link> 
-          }
-          <button onClick={logOutUser}>Logout {user && user.name}</button>    
         </>
       )}
  
