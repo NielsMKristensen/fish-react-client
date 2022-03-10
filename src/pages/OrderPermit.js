@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
+import { Container, Row, Col, Button, Card, Form } from 'react-bootstrap'
 
 
 //const API_URL = "http://localhost:5005";
@@ -12,6 +13,7 @@ function OrderPermit() {
     const { user } = useContext(AuthContext);
   //get data from state passed from link.
     const lakeData = useLocation();
+    console.log("stateData", lakeData)
     const lakeId = lakeData.state._id
     const userId = user._id
     
@@ -47,32 +49,30 @@ function OrderPermit() {
 
   //render form
   return (
-    <div className="createLake">
-      <h1>Sign Up</h1>
+    <div className="app">
+    <header className="app-header">
+    <Form className="mb-3 " onSubmit={handleOrderPermitSubmit}>
+            
+            <Col md>
+            <br/>
+              <Form.Group >
+                <Form.Label style={{color: "white", fontSize: "20px"}}>Select the day you want to go fishing in <b>{lakeData.state.lakeName}</b> </Form.Label>
+                <Form.Control type="date"  onChange={handlePermitDate} />
+              </Form.Group>
+                <br/>
+                <p style={{color: "white"}}>Price for the day is <b>{lakeData.state.prices} DKK</b> </p>
+                <p style={{color: "white"}}>Bill will be sint to your e-mail <b>{user.email}</b></p>
+                <p style={{color: "white"}}>press order to confirm</p>
+                <br />
+             <Button variant="primary" type="submit">Order</Button>
+              <br/>
+             <Link to={"/"} ><Button>Cancel</Button></Link>
 
-      <form className="createPermitForm" onSubmit={handleOrderPermitSubmit}>
-        <label>Select the day you want to go fishing in <b>{lakeData.state.lakeName}</b> :</label>
-        <br/>
-        <input 
-          id = "fishingdate"
-          type="date"
-          name="permitDate"
-          onChange={handlePermitDate}
-        />   
-        <br />
-        <p>Price for the day is <b>{lakeData.state.prices} DKK</b> </p>
-        <p>Bill will be sint to your e-mail <b>{user.email}</b></p>
-        <p>press order to confirm</p>
-        <br />
-        <button type="submit">Order</button>
-        
-        <Link to={"/"} >
-        <button>Cancel</button>
-        </Link>
-      </form>
+              { errorMessage && <p className="error-message">{errorMessage}</p> }
+          </Col>
+    </Form>
 
-      { errorMessage && <p className="error-message">{errorMessage}</p> }
-
+      </header>
     </div>
   )
 }

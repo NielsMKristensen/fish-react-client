@@ -8,10 +8,11 @@ function IsLakeOwner( { children } ) {
 
   // If the authentication is still loading 
   if (isLoading) return <p>Loading ...</p>;
-
+  console.log("ISOWNER",isOwner )
   if (!isLoggedIn) {
   // If the user is not logged in 
     return <Navigate to="/login" />;
+  // check if owner of a lake... if not got to not owner page. will be extended to enroll for owner in next iteration.
   } else if(!isOwner) {
     return <Navigate to="/NotOwner" />;
   }else {

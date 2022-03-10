@@ -18,7 +18,7 @@ function CreateLake() {
   const [openingHours, setOpeningHours] = useState("")
   const [prices, setPrices] = useState("")
   const [CVRnumber, setCVRnumber] = useState(0)
-  const [pictureLinks, setPictureLinks] = useState("")
+  
 
   //cloudinary stuff
     const [selectedFile, setSelectedFile] = useState(null);
@@ -39,7 +39,7 @@ function CreateLake() {
   const handleOpeningHours = (e) => setOpeningHours(e.target.value);
   const handlePrices = (e) => setPrices(e.target.value);
   const handleCVRnumber = (e) => setCVRnumber(e.target.value);
-  const handlePictureLinks = (e) => setPictureLinks(e.target.value);
+  
   
   //handle file selector
   const handleFileInputChange = (e) => {
@@ -55,7 +55,7 @@ function CreateLake() {
   const handleCreateLakeSubmit = (e) => {
     e.preventDefault();
     
-    const requestBody = {lakeName, street, city, lakePhoneNumber, lakeEmail, description, openingHours, prices, CVRnumber, pictureLinks};
+    const requestBody = {lakeName, street, city, lakePhoneNumber, lakeEmail, description, openingHours, prices, CVRnumber};
     const localToken = localStorage.getItem('authToken')
     console.log("TEST", selectedFile)
     
@@ -98,7 +98,7 @@ function CreateLake() {
   //render form
   return (
     <div className="createLake">
-      <h1>Sign Up</h1>
+      <h1>Create Lake</h1>
 
       <form className="createLakeForm" onSubmit={handleCreateLakeSubmit}>
         <label>Lake Name:</label>

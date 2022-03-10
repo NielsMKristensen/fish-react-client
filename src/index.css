@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
 }
 
 code {
@@ -12,13 +13,7 @@ code {
     monospace;
 }
 
-.Navbar {
-  width: auto;
-  height: 150px;
-  background: #352275;  
-  padding: 10px 20px;
-  margin-bottom: 20px;
-}
+
 
 .navBarPic {
   width: auto;
@@ -32,6 +27,9 @@ code {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 300px;
+  font-size: 20px;
+  
   
 
 }
@@ -51,15 +49,27 @@ code {
 }
 
 .createLake {
+  color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .createLakeForm {
+  color: white;
   width: 20%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-self: center;
 }
+
+.nav-color {
+
+  background-color: rgb(5, 31, 17);
+
+}
+
+
+
+

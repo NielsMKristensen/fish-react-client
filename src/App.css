@@ -1,6 +1,14 @@
 .App {
+  background-image: url(./assets/forest-background.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 130px;
+  margin-bottom: 60px;
 }
+
 
 .App-logo {
   height: 40vmin;
@@ -14,7 +22,7 @@
 }
 
 .App-header {
-  background-color: #075a15;
+  
   min-height: 20vh;
   display: flex;
   flex-direction: column;

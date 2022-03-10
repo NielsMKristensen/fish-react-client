@@ -2,6 +2,9 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from '../context/auth.context';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, Row, Col, Button, Card, Form } from 'react-bootstrap'
+
 
 //const API_URL = "http://localhost:5005";
 const API_URL = "https://fish-react-client.herokuapp.com";
@@ -38,32 +41,36 @@ function LoginPage(props) {
   };
   
   return (
-    <div className="LoginPage">
-      <h1>Login</h1>
+    <div className="App">
+    <header className="App-header">
+          <Form className="mb-3 " onSubmit={handleLoginSubmit}>
+            
+              <Col md>
+              <br/>
+                <Form.Group controlId="formEmail">
+                  <Form.Label>Email Adress</Form.Label>
+                  <Form.Control type="email" value={email} onChange={handleEmail} placeholder="example@gmail.com" />
+                </Form.Group>
+                <br/>
+              </Col>
+              <Col md>
+                <Form.Group controlId="formPassword">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control type="password" value={password} onChange={handlePassword} placeholder="FishHeaven1234" />
+                </Form.Group>
+              </Col>
+            <br/>
+            <Button variant="primary" type="submit">
+              Login
+            </Button>
+            <br/>
+            { errorMessage && <p className="error-message">{errorMessage}</p> }
+            <br/>
 
-      <form className="signupForm" onSubmit={handleLoginSubmit}>
-        <label>Email:</label>
-        <input 
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleEmail}
-        />
-
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
-        <br />
-        <button type="submit">Login</button>
-      </form>
-      { errorMessage && <p className="error-message">{errorMessage}</p> }
-
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
+            <p>Don't have an account yet?</p>
+            <Link to={"/signup"} style={{color: "white"}}> Sign Up</Link>
+          </Form>
+    </header>
     </div>
   )
 }

@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { AuthContext } from '../context/auth.context';
+import { Container, Row, Col, Button, Card, Form } from 'react-bootstrap'
 
 //const API_URL = "http://localhost:5005";
 const API_URL = "https://fish-react-client.herokuapp.com";
@@ -55,60 +56,50 @@ function LakeDetails () {
       })
   };
 
-  
+ 
   return (
-    <div className="Lake Details">
+    <div className="app">
+    <br/>
+    <header className="App-header" >
     
-      {lake && (
-        <>
-          <h1>{lake.lakeName}</h1>
-          <img src={lake.pictureLinks} alt={lake.lakeName} style={{ maxWidth: "400px"}}></img>
-          <p>Description:</p>
-          <p>{lake.description}</p>
-
-          <p>Address:</p>
-          <p>{lake.street}</p>
-          <p>{lake.city}</p>
-
-          <p>Phone Number:</p>
-          <p>{lake.lakePhoneNumber}</p>
-
-          <p>E-mail Address:</p>
-          <p>{lake.lakeEmail}</p>
-
-          <p>Opening Hours</p>
-          <p>{lake.openingHours}</p>
-
-          <p>Prices</p>
-          <p>{lake.prices}</p>
-
-          <p>CVR Number:</p>
-          <p>{lake.CVRnumber}</p>
-
-        </>
-      )}
-
-        {/* button to redirect to the order fishing permit page */}
-      <Link to="/orderpermit" state={lake}>
-        <button>Order Permit</button>
-      </Link>
-
-
-          {/*passes data to the edit form to prepopulate all the fields. */}
-      {user.ownerOfLake &&
-      <Link to={`/lake/edit/${_id}`} state={lake}>
-        <button>Edit Lake</button>
-      </Link>
-      }
-        {/* Delete button to delete the lake */}
-      {user.ownerOfLake &&
-      <form className="DeleteLakeForm" onSubmit={handleDeleteLakeSubmit}>
-        <button type="submit">Delete Lake</button>
-      </form>
-      }
+    {lake && (
+      <Card className="mb-3" style={{ color: "green", display: 'flex', flexDirection: 'row', width: "1000px", height: "600px" }}>
+            <Card.Img src={lake.pictureLinks} alt={lake.lakeName} style={{ width: "600px", height: "600px" }}  />
+            <Card.Body style={{ color: "green", display: 'flex', flexDirection: 'column'}} >
+              <Card.Title style={{fontSize:"30px"}}>Lake: {lake.lakeName}</Card.Title>
+              <Card.Text style={{fontSize:"20px"}}>Description: <br /> {lake.description}</Card.Text>
+              <Card.Text style={{fontSize:"20px"}}>Address: {lake.street} {lake.city}</Card.Text>
+              <Card.Text style={{fontSize:"20px"}}>Phone Number: {lake.lakePhoneNumber} </Card.Text>
+              <Card.Text style={{fontSize:"20px"}}>E-mail Address: {lake.lakeEmail} </Card.Text>
+              <Card.Text style={{fontSize:"20px"}}>Opening Hours: {lake.openingHours} </Card.Text>
+              <Card.Text style={{fontSize:"20px"}}>Prices: {lake.prices} </Card.Text>
+              <Card.Text style={{fontSize:"20px"}}>CVR Number: {lake.CVRnumber} </Card.Text>
+              
+              <div style={{ color: "green", display: 'flex', flexDirection: 'row', justifyContent: "space-around"  }}>
+              <Link to="/orderpermit" state={lake}>
+                <Button>Order Permit</Button>
+              </Link>
+              
+                    {/*passes data to the edit form to prepopulate all the fields. */}
+              {user.ownerOfLake &&
+              <Link to={`/lake/edit/${_id}`} state={lake}>
+                <Button>Edit Lake</Button>
+              </Link>
+              }
+              
+              {/* Delete button to delete the lake */}
+              {user.ownerOfLake &&
+              <form className="DeleteLakeForm" onSubmit={handleDeleteLakeSubmit}>
+               <Button type="submit">Delete Lake</Button>
+             </form>
+              }
+              </div>
+            </Card.Body>
+          </Card>
+          )} 
       { errorMessage && <p className="error-message">{errorMessage}</p> }
 
-      
+      </header>
     </div>
   );
 }

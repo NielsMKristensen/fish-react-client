@@ -1,7 +1,6 @@
 
 import './App.css';
 import { Routes, Route } from "react-router-dom";
-import Navbar from './components/Navbar';
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
 import CreateLake from './pages/CreateLake';
@@ -13,14 +12,15 @@ import NotOwner from './pages/NotOwner';
 import IsAnon from './components/isAnon';
 import IsPrivate from './components/isPrivate';
 import IsLakeOwner from './components/isLakeOwner';
+import Fishnavbar from './components/Navbar';
 
 function App() {
   return (
     <div className="App">
-     <Navbar />
+     <Fishnavbar />
 
      <Routes>
-     {/* <Route path="/" element={ <FrontPage /> } /> */}
+
      <Route path="/" element={ <LakeList /> } />
      <Route path="/CreateLake" element={<IsLakeOwner><CreateLake /></IsLakeOwner>} />
      <Route path="/lake/:_id" element={<IsPrivate><LakeDetails /></IsPrivate>} />
@@ -33,8 +33,6 @@ function App() {
      <Route path="/signup" element={<IsAnon><SignupPage /></IsAnon>}/>
      <Route path="/login" element={<IsAnon><LoginPage /></IsAnon>}/>
      
-     
-
      </Routes>
     </div>
   );

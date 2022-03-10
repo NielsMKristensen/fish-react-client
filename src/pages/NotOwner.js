@@ -1,9 +1,5 @@
 import { Link } from 'react-router-dom';
 
-
-
-
-
 function NotOwner () {
 
   return (

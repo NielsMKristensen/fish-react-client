@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Container, Row, Col, Button, Card, Form } from 'react-bootstrap'
 
 //const API_URL = "http://localhost:5005";
 const API_URL = "https://fish-react-client.herokuapp.com";
@@ -51,76 +52,75 @@ function SignupPage() {
 
   
   return (
-    <div className="SignupPage">
-      <h1>Sign Up</h1>
-
-      <form className="signupForm" onSubmit={handleSignupSubmit}>
-        <label>Email:</label>
-        <input 
+    <div className="App-header">
+      <Form className="mb-2 SignupPage" onSubmit={handleSignupSubmit}>
+        <Form.Label>Email Adress</Form.Label>
+        <Form.Control 
           type="email"
           name="email"
           value={email}
           onChange={handleEmail}
         />
 
-        <label>Password:</label>
-        <input 
+        <Form.Label>Password</Form.Label>
+        <Form.Control 
           type="password"
           name="password"
           value={password}
           onChange={handlePassword}
         />
 
-        <label>Name:</label>
-        <input 
+        <Form.Label>Name</Form.Label>
+        <Form.Control 
           type="text"
           name="name"
           value={name}
           onChange={handleName}
         />
 
-        <label>Street:</label>
-        <input 
+        <Form.Label>Street</Form.Label>
+        <Form.Control 
           type="text"
           name="street"
           value={street}
           onChange={handleStreet}
         />
 
-        <label>City:</label>
-        <input 
+        <Form.Label>City</Form.Label>
+        <Form.Control 
           type="text"
           name="city"
           value={city}
           onChange={handleCity}
         />
 
-        <label>Phone number:</label>
-        <input 
+        <Form.Label>Phone number</Form.Label>
+        <Form.Control 
           type="number"
           name="phoneNumber"
           value={phoneNumber}
           onChange={handlePhoneNumber}
         />
+        
+        <Form.Label >lake owner?
         <br />
-        <label >lake owner?
         <input 
           type="checkbox"
           name="ownerCheckbox"
-          
           onChange={handleOwnerOfLake}
         />
-        </label>
-
-
+        </Form.Label>
         <br />
-        <button type="submit">Sign Up</button>
-      </form>
+        <Button type="submit">Sign Up</Button>
 
-      { errorMessage && <p className="error-message">{errorMessage}</p> }
+        { errorMessage && <p className="error-message">{errorMessage}</p> }
 
-      <p>Already have account?</p>
-      <Link to={"/login"}> Login</Link>
+        <p>Already have account?</p>
+        <Link to={"/login"} style={{color: "white"}}> Login</Link> 
+
+      </Form>
+
+
     </div>
   )
 }

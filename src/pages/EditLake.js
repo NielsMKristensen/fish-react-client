@@ -25,7 +25,7 @@ const [description, setDescription] = useState(`${data.state.description}`)
 const [openingHours, setOpeningHours] = useState(`${data.state.openingHours}`)
 const [prices, setPrices] = useState(`${data.state.prices}`)
 const [CVRnumber, setCVRnumber] = useState(`${data.state.CVRnumber}`)
-const [pictureLinks, setPictureLinks] = useState("")
+
 
 //cloudinary stuff
 const [selectedFile, setSelectedFile] = useState();
@@ -47,7 +47,7 @@ const handleDescription = (e) => setDescription(e.target.value);
 const handleOpeningHours = (e) => setOpeningHours(e.target.value);
 const handlePrices = (e) => setPrices(e.target.value);
 const handleCVRnumber = (e) => setCVRnumber(e.target.value);
-const handlePictureLinks = (e) => setPictureLinks(e.target.value);
+
   
 //handle file selector
 const handleFileInputChange = (e) => {
@@ -59,7 +59,7 @@ const handleFileInputChange = (e) => {
 const handleUpdateLakeSubmit = (e) => {
     e.preventDefault();
     
-    const requestBody = {lakeName, street, city, lakePhoneNumber, lakeEmail, description, openingHours, prices, CVRnumber, pictureLinks};
+    const requestBody = {lakeName, street, city, lakePhoneNumber, lakeEmail, description, openingHours, prices, CVRnumber};
     const localToken = localStorage.getItem('authToken')
     
     //uploade file to cloudinary and save id in pictureLinks
@@ -97,7 +97,7 @@ const handleUpdateLakeSubmit = (e) => {
   //render update form
   return (
     <div className="createLake">
-      <h1>Sign Up</h1>
+      <h1>Edit Lake</h1>
 
       <form className="createLakeForm" onSubmit={handleUpdateLakeSubmit}>
         <label>Lake Name:</label>
